@@ -1,16 +1,26 @@
 package br.com.udemy.cursoudemy.model;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name="person")
 public class Person implements Serializable {
 
     private static final long serialVersion = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "primeiro_nome")
     private String primeiroNome;
+    @Column(name = "ultimo_nome")
     private String UltimoNome;
+    @Column
     private String endereco;
+    @Column
     private String genero;
 
     public Person() {
