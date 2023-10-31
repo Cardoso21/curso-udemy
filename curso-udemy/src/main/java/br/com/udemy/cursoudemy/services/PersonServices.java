@@ -1,5 +1,6 @@
 package br.com.udemy.cursoudemy.services;
 
+import br.com.udemy.cursoudemy.data.vo.v1.PersonVO;
 import br.com.udemy.cursoudemy.exceptions.ResourceNotFoundException;
 import br.com.udemy.cursoudemy.model.Person;
 import br.com.udemy.cursoudemy.repositories.PersonRepository;
@@ -16,42 +17,42 @@ public class PersonServices {
     @Autowired
     PersonRepository repository;
 
-    public List<Person> findAll(){
+    public List<PersonVO> findAll(){
 
         return repository.findAll();
     }
 
 
-    public Person findById(Long id){
+    public PersonVO findById(Long id){
         logger.info("buscando um person!");
 
-        Person person = new Person();
-        person.setPrimeiroNome("Wagner");
-        person.setUltimoNome("Cardoso");
-        person.setEndereco("Valparaiso - Goiás - Brasil");
-        person.setGenero("Masculino");
+        PersonVO personvo = new Person();
+        personvo.setPrimeiroNome("Wagner");
+        personvo.setUltimoNome("Cardoso");
+        personvo.setEndereco("Valparaiso - Goiás - Brasil");
+        personvo.setGenero("Masculino");
         return repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Person nao encontrado"));
     }
 
-    private Person mockPerson(int i) {
-        Person person = new Person();
-        person.setPrimeiroNome("Person nome " + i);
-        person.setUltimoNome("Ultimo nome " + i);
-        person.setEndereco("Llgum endereço no Brasil " + i);
-        person.setGenero("Masculino");
-        return person;
+    private PersonVO mockPerson(int i) {
+        PersonVO personvo = new Person();
+        personvo.setPrimeiroNome("Person nome " + i);
+        personvo.setUltimoNome("Ultimo nome " + i);
+        personvo.setEndereco("Llgum endereço no Brasil " + i);
+        personvo.setGenero("Masculino");
+        return personvo;
     }
 
-    public Person create(Person person){
+    public PersonVO create(PersonVO person){
 
         logger.info("creando um person!");
         return repository.save(person);
     }
 
-    public Person update(Person person){
+    public PersonVO update(Person person){
 
         logger.info("atualizando um person!");
-        Person person1 = repository.findById(person.getId()).orElseThrow(()-> new ResourceNotFoundException("id nao encontrado"));
+        PersonVO person1 = repository.findById(person.getId()).orElseThrow(()-> new ResourceNotFoundException("id nao encontrado"));
         person1.setPrimeiroNome(person.getPrimeiroNome());
         person1.setUltimoNome(person.getUltimoNome() );
         person1.setEndereco(person.getEndereco() );
@@ -61,7 +62,7 @@ public class PersonServices {
     public void delete(Long id){
 
         logger.info("atualizando um person!");
-        Person person1 = repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("id nao encontrado"));
+        PersonVO person1 = repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("id nao encontrado"));
         repository.delete(person1);
 
 
