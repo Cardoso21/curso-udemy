@@ -14,10 +14,13 @@ public class DozerMapper {
         return mapper.map(origin,destino);
     }
     public static <O, D> List<D> parseListObject(List <O> origin, Class<D> destino){
-        List<D> destinoObjetc = new ArrayList<>();
+        List<D> destinoObjetc = new ArrayList<D>();
         for (O o:origin) {
-            destinoObjetc.add(mapper.map(origin,destino));
+            destinoObjetc.add(mapper.map(o,destino));
         }
         return destinoObjetc;
     }
+
+
+
 }

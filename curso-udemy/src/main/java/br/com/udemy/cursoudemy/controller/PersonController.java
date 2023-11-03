@@ -24,7 +24,7 @@ public class PersonController {
         return services.findById(id);
     }
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List <PersonVO> findyAll(){
+    public List <PersonVO> findAll(){
         return services.findAll();
     }
 
