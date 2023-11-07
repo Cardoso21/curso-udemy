@@ -1,6 +1,7 @@
 package br.com.udemy.cursoudemy.controller;
 
 import br.com.udemy.cursoudemy.data.vo.v1.PersonVO;
+import br.com.udemy.cursoudemy.data.vo.v2.v1.PersonVOV2;
 import br.com.udemy.cursoudemy.services.PersonServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -32,6 +33,12 @@ public class PersonController {
     public PersonVO create(
             @RequestBody PersonVO person){
         return services.create(person);
+    }
+
+    @PostMapping(value = "/v2",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public PersonVOV2 createV2(
+            @RequestBody PersonVOV2 person){
+        return services.createV2(person);
     }
 
     @PutMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)

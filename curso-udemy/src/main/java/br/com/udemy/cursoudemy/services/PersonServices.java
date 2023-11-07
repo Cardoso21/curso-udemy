@@ -1,15 +1,15 @@
 package br.com.udemy.cursoudemy.services;
 
 import br.com.udemy.cursoudemy.data.vo.v1.PersonVO;
+import br.com.udemy.cursoudemy.data.vo.v2.v1.PersonVOV2;
 import br.com.udemy.cursoudemy.exceptions.ResourceNotFoundException;
 import br.com.udemy.cursoudemy.mapper.DozerMapper;
+import br.com.udemy.cursoudemy.mapper.custom.PersonMapper;
 import br.com.udemy.cursoudemy.model.Person;
 import br.com.udemy.cursoudemy.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -19,6 +19,8 @@ public class PersonServices {
 
     @Autowired
     PersonRepository repository;
+    @Autowired
+    PersonMapper mapper;
     public List<PersonVO> findAll() {
 
         logger.info("buscando todos os persons! ");
@@ -33,14 +35,20 @@ public class PersonServices {
         return DozerMapper.parseObject(entity,PersonVO.class);
     }
 
-
-
     public PersonVO create(PersonVO personvo){
 
         logger.info("creando um person!");
 
         var entity =DozerMapper.parseObject(personvo, Person.class);
         return DozerMapper.parseObject(repository.save(entity),PersonVO.class);
+
+    }
+    public PersonVOV2 createV2(PersonVOV2 personvo){
+
+        logger.info("creando um person!, usando v2");
+
+        var entity =mapper.convertVoToEntity(personvo);
+        return mapper.convertEntityToVo(repository.save(entity));
 
     }
 
