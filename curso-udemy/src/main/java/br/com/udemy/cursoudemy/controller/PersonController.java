@@ -11,30 +11,34 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person/v1")
 public class PersonController {
 
     private final AtomicLong counter = new AtomicLong();
     @Autowired
     private PersonServices services;
 
-    @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public PersonVO findyById(
             @PathVariable(value = "id")Long id ){
         return services.findById(id);
     }
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public List <PersonVO> findAll(){
         return services.findAll();
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public PersonVO create(
             @RequestBody PersonVO person){
         return services.create(person);
     }
 
-    @PutMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}",
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public PersonVO update(
             @RequestBody PersonVO person){
         return services.update(person);

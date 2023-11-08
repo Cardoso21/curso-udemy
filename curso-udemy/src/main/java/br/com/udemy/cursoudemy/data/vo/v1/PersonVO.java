@@ -1,7 +1,5 @@
 package br.com.udemy.cursoudemy.data.vo.v1;
 
-import jakarta.persistence.*;
-
 import java.io.Serializable;
 import java.util.Objects;
 

@@ -18,9 +18,9 @@ public class Person implements Serializable {
     private String primeiroNome;
     @Column(name = "ultimo_nome")
     private String UltimoNome;
-    @Column
+    @Column(name = "endereco")
     private String endereco;
-    @Column
+    @Column(name = "genero")
     private String genero;
 
     public Person() {
